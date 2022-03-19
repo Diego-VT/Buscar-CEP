@@ -1,15 +1,22 @@
 package cep;
 
-import java.awt.EventQueue;
-
-import javax.swing.JDialog;
-import java.awt.Toolkit;
-import javax.swing.JLabel;
-import java.awt.SystemColor;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
 import java.awt.Cursor;
+import java.awt.Desktop;
+import java.awt.EventQueue;
+import java.awt.SystemColor;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.net.URI;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+
+@SuppressWarnings("serial")
 public class Sobre extends JDialog {
 
 	/**
@@ -33,48 +40,77 @@ public class Sobre extends JDialog {
 	 * Create the dialog.
 	 */
 	public Sobre() {
+		setModal(true);
 		setTitle("Sobre");
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Sobre.class.getResource("/img/home.png")));
-		setBounds(100, 100, 450, 300);
+		setBounds(150, 150, 450, 300);
 		getContentPane().setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("Buscar CEP - Vers\u00E3o 1.0");
 		lblNewLabel.setBounds(10, 41, 154, 14);
 		getContentPane().add(lblNewLabel);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("@Autor: Diego Vieira Torres");
-		lblNewLabel_1.setBounds(10, 66, 142, 14);
+		lblNewLabel_1.setBounds(10, 66, 179, 14);
 		getContentPane().add(lblNewLabel_1);
-		
+
 		JLabel lblNewLabel_2 = new JLabel("WEB Services:");
 		lblNewLabel_2.setBounds(10, 100, 88, 14);
 		getContentPane().add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_3 = new JLabel("https://www.republicavirtual.com.br/");
-		lblNewLabel_3.setForeground(SystemColor.textHighlight);
-		lblNewLabel_3.setBackground(SystemColor.textHighlight);
-		lblNewLabel_3.setBounds(95, 100, 237, 14);
-		getContentPane().add(lblNewLabel_3);
-		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setIcon(new ImageIcon(Sobre.class.getResource("/img/youtube.png")));
-		btnNewButton.setForeground(SystemColor.control);
-		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton.setBorder(null);
-		btnNewButton.setBackground(SystemColor.control);
-		btnNewButton.setBounds(62, 189, 65, 48);
-		getContentPane().add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton_1.setIcon(new ImageIcon(Sobre.class.getResource("/img/github.png")));
-		btnNewButton_1.setBorder(null);
-		btnNewButton_1.setForeground(SystemColor.control);
-		btnNewButton_1.setBackground(SystemColor.control);
-		btnNewButton_1.setBounds(191, 189, 51, 48);
-		getContentPane().add(btnNewButton_1);
+
+		JLabel lblWebService = new JLabel("https://www.republicavirtual.com.br/");
+		lblWebService.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				link("https://www.republicavirtual.com.br/");
+			}
+		});
+		lblWebService.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblWebService.setForeground(SystemColor.textHighlight);
+		lblWebService.setBackground(SystemColor.textHighlight);
+		lblWebService.setBounds(95, 100, 237, 14);
+		getContentPane().add(lblWebService);
+
+		JButton btnYoutube = new JButton("New button");
+		btnYoutube.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				link("https://www.youtube.com/c/RoboticapraticaBr");
+			}
+		});
+		btnYoutube.setIcon(new ImageIcon(Sobre.class.getResource("/img/youtube.png")));
+		btnYoutube.setForeground(SystemColor.control);
+		btnYoutube.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnYoutube.setBorder(null);
+		btnYoutube.setBackground(SystemColor.control);
+		btnYoutube.setBounds(62, 189, 65, 48);
+		getContentPane().add(btnYoutube);
+
+		JButton btnGithub = new JButton("New button");
+		btnGithub.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				link("https://github.com/Diego-VT");
+			}
+		});
+		btnGithub.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnGithub.setIcon(new ImageIcon(Sobre.class.getResource("/img/github.png")));
+		btnGithub.setBorder(null);
+		btnGithub.setForeground(SystemColor.control);
+		btnGithub.setBackground(SystemColor.control);
+		btnGithub.setBounds(191, 189, 51, 48);
+		getContentPane().add(btnGithub);
 
 	}
 
+	private void link(String site) {
+		Desktop desktop = Desktop.getDesktop();
+		try {
+			URI uri = new URI(site);
+			desktop.browse(uri);
+		} catch (Exception e) {
+			System.out.println(e);
+
+		}
+
+	}
 }
