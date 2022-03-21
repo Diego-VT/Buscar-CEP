@@ -187,7 +187,7 @@ public class Cep extends JFrame {
 					logradouro = element.getText();
 				}
 				
-				if (element.getQualifiedName().equals("resultado")) {
+				/*if (element.getQualifiedName().equals("resultado")) {
 					resultado = element.getText();
 					if (resultado.equals("1")) {
 						lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource(
@@ -195,7 +195,7 @@ public class Cep extends JFrame {
 					} else {
 						JOptionPane.showMessageDialog(null, "CEP não encotrado");
 					}
-				}
+				}*/
 
 			}
 			// setar o campo Endereco
