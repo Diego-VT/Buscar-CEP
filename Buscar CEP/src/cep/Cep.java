@@ -108,6 +108,12 @@ public class Cep extends JFrame {
 		contentPane.add(lblNewLabel_1_1_1_1);
 
 		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				limpar();
+
+			}
+		});
 		btnLimpar.setBounds(10, 190, 89, 23);
 		contentPane.add(btnLimpar);
 
@@ -130,7 +136,7 @@ public class Cep extends JFrame {
 
 			}
 		});
-		btnCep.setBounds(201, 31, 89, 23);
+		btnCep.setBounds(176, 31, 89, 23);
 		contentPane.add(btnCep);
 
 		JButton btnSobre = new JButton("");
@@ -151,7 +157,7 @@ public class Cep extends JFrame {
 		RestrictedTextField validar = new RestrictedTextField(txtCep);
 
 		lblStatus = new JLabel("");
-		lblStatus.setBounds(135, 35, 20, 20);
+		lblStatus.setBounds(135, 32, 20, 20);
 		contentPane.add(lblStatus);
 		validar.setOnlyNums(true);
 		validar.setLimit(8);
@@ -186,16 +192,15 @@ public class Cep extends JFrame {
 				if (element.getQualifiedName().equals("logradouro")) {
 					logradouro = element.getText();
 				}
-				
-				/*if (element.getQualifiedName().equals("resultado")) {
+
+				if (element.getQualifiedName().equals("resultado")) {
 					resultado = element.getText();
-					if (resultado.equals("1")) {
-						lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-								"C:\\Users\\Diego Torres\\git\\Buscar-CEP\\Buscar CEP\\src\\img\\check.png")));
+					if (((resultado.equals("1")) || (resultado.equals("2")))) {
+						lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/check.png")));
 					} else {
 						JOptionPane.showMessageDialog(null, "CEP não encotrado");
 					}
-				}*/
+				}
 
 			}
 			// setar o campo Endereco
@@ -206,5 +211,14 @@ public class Cep extends JFrame {
 
 		}
 
+	}
+	private void limpar() {
+		txtCep.setText(null);
+		txtEndereco.setText(null);
+		txtBairro.setText(null);
+		txtCidade.setText(null);
+		cboUf.setSelectedItem(null);
+		txtCep.requestFocus();
+		lblStatus.setIcon(null);
 	}
 }
